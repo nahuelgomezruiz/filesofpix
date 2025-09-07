@@ -11,7 +11,7 @@ This file implements the readaline as denoted by the spec. ADD MORE HERE
 size_t readaline(FILE *inputfd, char **datapp) 
 {
     if (inputfd == NULL | datapp == NULL) { /* Check for valid input */
-        /* Runtime error */
+        RAISE(Checked_Runtime_Error, "NULL argument");
     }
     int ch = fgetc(inputfd); /* Check for EOF @ start */
     if (ch == EOF) {
@@ -21,17 +21,15 @@ size_t readaline(FILE *inputfd, char **datapp)
     size_t capacity = 1050; /* Init buffer */
     char *buffer = malloc(capacity);
     if (buffer == NULL) {
-        /* Runtime error */
+        RAISE(Checked_Runtime_Error, "NULL argument");
     }
     size_t length = 0;
     while (ch != EOF && ch != '\n') { /* Read chars until newline/EOF */
         if (length >= capacity) { /* Check for more space (FULL CREDIT) */
-            // Partial credit: exit with error
             fprintf(stderr, "readaline: input line too long\n");
             free(buffer);
             exit(4);
-            // Full credit: reallocate buffer
-            // capacity *= 2;
+            // capacity *= 2; /* FULL CREDIT Reallocate buffer */ 
             // buffer = realloc(buffer, capacity);
             // if (buffer == NULL) { raise error }
         }
@@ -43,7 +41,7 @@ size_t readaline(FILE *inputfd, char **datapp)
     }
     if (ferror(inputfd)) { /* Check for read errors */
         free(buffer);
-        /* Runtime error*/
+        RAISE(Checked_Runtime_Error, "NULL argument");
     }
     *dataapp = buffer;
     return length;
