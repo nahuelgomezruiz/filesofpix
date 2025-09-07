@@ -1,6 +1,6 @@
 /* 
 readaline.c
-Authors: Sabeeh Iftikhar (siftik01), Nahuel Gomez (UTLN HERE)
+Authors: Sabeeh Iftikhar (siftik01), Nahuel Gomez (agomez08)
 filesofpix
 
 This file implements the readaline as denoted by the spec. ADD MORE HERE
