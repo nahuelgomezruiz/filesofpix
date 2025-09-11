@@ -10,7 +10,7 @@
 #
 
 # Executables to built using "make all"
-EXECUTABLES = restoration
+EXECUTABLES = restoration test_readaline more_readaline_tests test_restoration
 
 #
 #  The following is a compromise. You MUST list all your .h files here.
@@ -77,12 +77,20 @@ clean:
 #    Those .o files are linked together to build the corresponding
 #    executable.
 #
-restoration: restoration.o readaline.o
-	$(CC) $(LDFLAGS) -o restoration  restoration.o readaline.o $(LDLIBS)
 
+restoration: restoration.o readaline.o
+	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+test_readaline: test_readaline.o readaline.o
+	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+test_restoration: test_restoration.o readaline.o
+	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+more_readaline_tests: more_readaline_tests.o readaline.o
+	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 #
 # Other Shortcuts worth nothing
 # $@ takes the name of the build rule and inserts it into the command
 # $^ inserts the relocatable object file names into the command
 #
-
