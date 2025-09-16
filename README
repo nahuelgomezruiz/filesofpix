@@ -1,1 +1,23 @@
-filesofpix
+Authors: Sabeeh Iftikhar (siftik01), Nahuel Gomez (agomez08)
+
+Acknowledgements: Received help from TAs Vedant, Tamir, Josh, Moizes, Lauren
+                  Shepard
+
+Implementation:
+        Correctly Implemented:
+                We have successfully implemented the foundational components of 
+                both Part A and Part B. For Part A, our readaline function 
+                correctly reads lines from input streams with proper memory 
+                allocation, error handling, and EOF detection. The function 
+                uses dynamic buffer allocation with helper functions for NULL 
+                checking and file error validation. For Part B, our restoration
+                program properly handles command-line arguments, file I/O 
+                operations including stdin support, and includes comprehensive 
+                exception handling with TRY/EXCEPT blocks. We have implemented 
+                helper functions for file management, PGM header creation, and 
+                basic data structure operations. The program correctly outputs 
+                to stdout in P5 format and manages memory appropriately.
+
+        Not Correctly Implemented: Hopefully nothing :D?
+
+Time spent: Approximately 18 hours were spent on this assignment

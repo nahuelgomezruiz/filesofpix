@@ -1,16 +1,14 @@
-# 	           Makefile for CS 40 Homework 1
+# Makefile for CS 40 Homework 1
 #
-#     Author: Noah Mendelsohn (adapted from Norman Ramsey's compile script)
-#
-#  Maintenance targets:
-#
-#
-#    all         - (default target) make sure everything's compiled
-#    clean       - clean out all compiled object and executable files
-#
+# Author: Noah Mendelsohn (adapted from Norman Ramsey's compile script)
+#		  Modified for usage by Sabeeh Iftikhar (siftik01) and
+# 		  Nahuel Gomez (agomez08)
+# filesofpix
+# 09/15/2025
 
-# Executables to built using "make all"
-EXECUTABLES = restoration test_readaline more_readaline_tests test_restoration
+
+# Executables to build using "make all"
+EXECUTABLES = restoration
 
 #
 #  The following is a compromise. You MUST list all your .h files here.
@@ -19,9 +17,9 @@ EXECUTABLES = restoration test_readaline more_readaline_tests test_restoration
 #  files it really uses.
 #
 # Add your own .h files to the right side of the assingment below.
-INCLUDES = 
+INCLUDES = line_table.h restoration.h
 
-# Do all C compies with gcc (at home you could try clang)
+# C compiles with gcc
 CC = gcc
 
 # Comp 40 directory
@@ -31,11 +29,10 @@ COMP40 = /comp/40
 HANSON = /usr/sup/cii40
 
 # Updating include path to use current directory
-# (which is .), Comp 40 .h files, and CII interfaces
 IFLAGS = -I. -I$(COMP40)/build/include -I$(HANSON)/include/cii
 
 
-# the next line enables you to compile and link against course software
+# Compile and link against course software
 CFLAGS =  -g -std=c99 -Wall -Wextra -Werror -Wfatal-errors -pedantic $(IFLAGS)
 
 # Linking flags, used in the linking step
@@ -48,49 +45,25 @@ LDFLAGS = -g -L$(COMP40)/build/lib -L$(HANSON)/lib64
 # Only brightness requires the binary for pnmrdr.
 LDLIBS = -lpnmrdr -lcii40 -lm
 
-
-# 
-#    'make all' will build all executables
-#
-#    Note that "all" is the default target that make will build
-#    if nothing is specifically requested
-#
+#    'make all' will build all executables. "all" is default target 
 all: $(EXECUTABLES)
 
-# 
 #    'make clean' will remove all object and executable files
-#
 clean:
 	rm -f $(EXECUTABLES) *.o
 
-
-# 
 #    To get any .o, compile the corresponding .c
-#
 %.o:%.c $(INCLUDES) 
 	$(CC) $(CFLAGS) -c $<
 
-#
 # Individual executables
-#
-#    Each executable depends on one or more .o files.
-#    Those .o files are linked together to build the corresponding
-#    executable.
-#
 
-restoration: restoration.o readaline.o
+restoration: restoration.o readaline.o line_table.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 test_readaline: test_readaline.o readaline.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-test_restoration: test_restoration.o readaline.o
-	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
-
-more_readaline_tests: more_readaline_tests.o readaline.o
-	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
-#
 # Other Shortcuts worth nothing
 # $@ takes the name of the build rule and inserts it into the command
 # $^ inserts the relocatable object file names into the command
-#
